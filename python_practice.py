@@ -7,7 +7,7 @@ def greet(s):
 greet('hi')
 
 def max_value(nums):
-    max=nums[0]
+    max=float('-inf')
     for num in nums:
       if num>max:
         max=num 
@@ -89,3 +89,17 @@ def compress(s):
         result.append(num+s[i])
       i=j 
   return ''.join(result)
+
+
+def five_sort(nums):
+  pointer_5=0 
+  pointer_not5=0 
+  while pointer_not5 < len(nums):
+    if (nums[pointer_not5]==5):
+      pointer_not5+=1
+    else:
+      nums[pointer_5], nums[pointer_not5] = nums[pointer_not5], nums[pointer_5]
+      pointer_not5+=1
+      pointer_5+=1
+      # nums[pointer_5], nums[pointer_not5] = nums[pointer_not5], nums[pointer_5]
+  return nums
