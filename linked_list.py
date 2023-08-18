@@ -15,10 +15,13 @@ c.next = d
 #a -> b -> c -> d
 
 def printList(head):
-    current = head 
-    while current is not None: 
-        print(current.val)
-        current=current.next
-
+    # current = head 
+    # while current is not None: 
+    #     print(current.val)
+    #     current=current.next
+    if head is None:
+        return 
+    print(head.val) 
+    printList(head.next)
 
 printList(a)
