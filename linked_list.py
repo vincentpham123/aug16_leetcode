@@ -122,3 +122,53 @@ def merge_lists(head_1, head_2):
       tail.next = current_2 
       current_2 = current_2.next 
     tail = tail.next 
+
+def merge_lists(head_1, head_2):
+  dummy_tail = Node(None) 
+  tail = dummy_tail 
+  current_1 = head_1
+  current_2 = head_2 
+  
+  while current_1 is not None and current_2 is not None:
+    if current_1.val <= current_2.val:
+      tail.next = current_1 
+      current_1 = current_1.next 
+    else:
+      tail.next = current_2 
+      current_2 = current_2.next 
+    tail = tail.next 
+    
+  if current_1 is not None: tail.next = current_1
+  if current_2 is not None: tail.next = current_2 
+  return dummy_tail.next
+
+def is_univalue_list(head):
+  current = head 
+  next = current.next
+  
+  while current is not None and next is not None:
+    if next.val != current.val:
+      return False 
+    
+    current = current.next 
+    next = current.next
+  return True
+
+def longest_streak(head):
+  max = 0
+  current_streak=0
+  prev_val = None
+  # will update current_max everytime val is the same
+  # once not the same, will check against max, if bigger, update max 
+
+  current = head
+  while current is not None:
+    if current.val == prev_val:
+      current_streak+=1 
+    else:
+      current_streak=1 
+    prev_val = current.val 
+    if current_streak > max:
+      max = current_streak
+    current = current.next 
+  return max
