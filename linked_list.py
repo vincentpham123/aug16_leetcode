@@ -60,3 +60,65 @@ def get_node_value(head, index):
     current = current.next 
     list_order+=1
   return None
+    #recursive method
+    # if head is None:
+    #     return None
+    # if index==0:
+    #     return head.val 
+    # return get_node_value(head.next,index-1)
+
+def reverse_list(head):
+  # need to change the next to the prev 
+  # track prev and next 
+  prev = None
+  current = head
+  while current is not None:
+    next_node = current.next
+    current.next = prev
+    prev = current
+    current = next_node 
+  return prev
+
+
+def zipper_lists(head_1, head_2):
+  tail = head_1 
+ #start off the tail with head_1 
+# from there I will switch between head_2 and head_1
+  #to keep track i know that head_2 will be all odd indexes
+  
+  turn = 'odd'
+  current_1 = head_1.next
+  current_2 = head_2 
+  
+  while current_1 is not None and current_2 is not None:
+    if turn == 'odd':
+      tail.next = current_2 
+      current_2 = current_2.next 
+      turn = 'even'
+    else:
+      tail.next = current_1 
+      current_1 = current_1.next 
+      turn = 'odd'
+    tail = tail.next 
+  # once one of the linked list runs out
+  # the condition will fail
+  if current_1 is not None:
+    tail.next = current_1 
+  if current_2 is not None:
+    tail.next = current_2
+  return head_1
+
+def merge_lists(head_1, head_2):
+  dummy_tail = Node(None) 
+  tail = dummy_tail 
+  current_1 = head_1
+  current_2 = head_2 
+  
+  while current_1 is not None and current_2 is not None:
+    if current_1.val <= current_2.val:
+      tail.next = current_1 
+      current_1 = current_1.next 
+    else:
+      tail.next = current_2 
+      current_2 = current_2.next 
+    tail = tail.next 
