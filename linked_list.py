@@ -172,3 +172,48 @@ def longest_streak(head):
       max = current_streak
     current = current.next 
   return max
+
+def remove_node(head, target_val):
+  prev = None # to change the next to the current.next when target is found
+  current = head 
+  tail = head 
+  while current is not None:
+    if current.val ==target_val:
+      if prev is not None:
+        prev.next = current.next 
+      else:
+        tail = current.next 
+      current.next = None 
+      return tail
+    prev = current
+    current = current.next
+
+def remove_node(head, target_val):
+  if head.val == target_val:
+    return head.next
+  prev = None # to change the next to the current.next when target is found
+  current = head 
+  while current is not None:
+    if current.val ==target_val:
+        prev.next = current.next 
+        break
+    prev = current
+    current = current.next
+    
+  return head
+
+
+def create_linked_list(values,i=0):
+  # dummy_tail=Node(None)
+  # prev=dummy_tail
+  # for index,element in enumerate(values):
+  #     new_node = Node(element)
+  #     prev.next = new_node 
+  #     prev = prev.next 
+  # return dummy_tail.next
+  
+  if i == len(values):
+    return None
+  head = Node(values[i])
+  head.next = create_linked_list(values,i+1 )
+  return head
