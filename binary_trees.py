@@ -79,3 +79,28 @@ def tree_includes(root, target):
     if node.right:
       queue.append(node.right)
   return False
+
+def tree_min_value(root):
+  if root is None:
+    return float("inf")
+  min_left = tree_min_value(root.left)
+  min_right = tree_min_value(root.right)
+  
+  return min(root.val,min_left,min_right)
+
+def max_path_sum(root):
+    if not root:
+      return 0
+    stack = [(root,root.val)]
+    
+    max_sum=float("-inf")
+    
+    while stack:
+      node, current_sum = stack.pop()
+      if node.left is None and node.right is None:
+        max_sum = max(max_sum,current_sum)
+      if node.left:
+        stack.append((node.left,current_sum+node.left.val))
+      if node.right:
+        stack.append((node.right, current_sum + node.right.val))
+    return max_sum
