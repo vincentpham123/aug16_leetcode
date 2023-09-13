@@ -123,3 +123,71 @@ def bottom_right_value(root):
     if node.right:
       queue.append(node.right)
   return result
+
+def all_tree_paths(root):
+  if root is None:
+    return []
+
+  if root.left is None and root.right is None:
+    return [[root.val]]
+  paths=[]
+  
+  left = all_tree_paths(root.left)
+  for sub_path in left:
+    paths.append([root.val,*sub_path])
+  right = all_tree_paths(root.right)
+  for sub_path in right:
+    paths.append([root.val,*sub_path])
+  return paths
+
+from collections import deque
+def tree_levels(root):
+  if root is None:
+    return []
+  queue = deque([(root,0)])
+  levels = []
+  while queue:
+    node, current_level = queue.popleft()
+    if len(levels) == current_level:
+      levels.append([node.val])
+    else:
+      levels[current_level].append(node.val)
+    
+    
+    if node.left:
+      queue.append((node.left,current_level + 1 ))
+    if node.right:
+      queue.append((node.right, current_level +1))
+  return levels
+
+from statistics import mean
+def level_averages(root):
+  levels= []
+  fill_levels(root,levels, 0)
+  avgs=[]
+  for level in levels:
+    avgs.append(mean(level))
+  return avgs
+
+def fill_levels(root,levels, level_num):
+  if root is None:
+    return
+  if level_num == len(levels):
+    levels.append( [ root.val ])
+  else:
+    levels[level_num].append(root.val)
+  
+  fill_levels(root.left, levels, level_num + 1)
+  fill_levels(root.right, levels, level_num+1)
+from collections import deque
+def leaf_list(root):
+  leaves = []
+  _leaf_list(root,leaves)
+  return leaves 
+def _leaf_list(root,leaves):
+  if root is None:
+    return 
+  if root.left is None and root.right is None:
+    leaves.append(root.val)
+  _leaf_list(root.left,leaves)
+  _leaf_list(root.right,leaves)
