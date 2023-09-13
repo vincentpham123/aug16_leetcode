@@ -104,3 +104,22 @@ def max_path_sum(root):
       if node.right:
         stack.append((node.right, current_sum + node.right.val))
     return max_sum
+
+from collections import deque
+def bottom_right_value(root):
+  # take advantage of breath first search
+  # depending on if i add from left node or right node 
+  # i can return the last node from the queue 
+  # i can reassign a node everytime 
+  queue = deque ([root])
+  
+  result = root.val
+  
+  while queue:
+    node = queue.popleft()
+    result = node.val
+    if node.left:
+      queue.append(node.left)
+    if node.right:
+      queue.append(node.right)
+  return result
