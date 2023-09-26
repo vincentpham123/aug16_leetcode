@@ -70,4 +70,21 @@ def create_graph(edges):
       graph[b].append(a)
     return graph
 
-
+def largest_component(graph):
+  max = 0
+  # this will be used to check the intersection length
+  visited = set()
+  for node in graph:
+    size = explore_size(graph,node, visited)
+    if size>max:
+      max = size 
+  return max
+def explore_size(graph, node, visited):
+  if node in visited:
+    return 0
+  visited.add(node)
+  
+  size=1
+  for neighbor in graph[node]:
+    size+=explore_size(graph, neighbor, visited)
+  return size
