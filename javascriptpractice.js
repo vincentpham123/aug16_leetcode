@@ -16,3 +16,21 @@ const pairedParentheses = (str) => {
     }
     return true;
   };
+
+const pairedParentheses = (str) => {
+    let count =0;
+    // i know each parenthesis will cancel each other out
+    // as iterate through, I can check for both
+    // depending on which one, i can increment or decrement my count
+    
+    for (let char of str){
+      if(char ==='('){
+        count +=1
+      } else if (char===')') {
+        if (count ===0) return false;
+        count -=1
+      }
+    }
+    return count ===0
+  };
+  
