@@ -49,3 +49,27 @@ def binary_search_tree_includes(root, target):
       return binary_search_tree_includes(root.right, target)
   else:
       return binary_search_tree_includes(root.left, target)
+  
+
+def is_binary_search_tree(root,min_val = float('-inf'),max_val=float('inf')):
+    if root is None:
+        return True
+
+    if not (min_val <= root.val <= max_val):
+        return False 
+
+    return (is_binary_search_tree(root.left, min_val, root.val) and
+        is_binary_search_tree(root.right, root.val, max_val))
+
+
+def post_order(root):
+  values=[]
+  _post_order(root,values)
+  return values
+def _post_order(root,values):
+  if root is None:
+    return
+  
+  _post_order(root.left, values)
+  _post_order(root.right, values)
+  values.append(root.val)
