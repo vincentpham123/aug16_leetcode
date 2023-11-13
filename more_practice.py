@@ -9,4 +9,25 @@ def lexical_order(word_1, word_2, alphabet):
     elif value_2 < value_1:
       return False 
   return True
+
+def linked_palindrome(head):
+  values = []
+  current = head 
+  while current is not None:
+    values.append(current.val)
+    current = current.next 
+    
+  return values == values[::-1]
+
+def paired_parentheses(string):
+  count = 0
   
+  for char in string:
+    if char == '(':
+      count +=1
+    if char == ')':
+      if count == 0:
+        return False 
+      count -=1
+  
+  return count == 0

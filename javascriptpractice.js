@@ -1,4 +1,4 @@
-const pairedParentheses = (str) => {
+const pairedParentheses1 = (str) => {
     // i can keep track of one parenthesis, and then check if the other side occurs after
     // if so I can return true 
     const hash ={'(':[], ')':[]}
