@@ -31,3 +31,57 @@ def paired_parentheses(string):
       count -=1
   
   return count == 0
+
+
+def befitting_brackets(string):
+  stack = []
+  
+  brackets = {
+    '(' : ')',
+    '[' : ']',
+    '{' : '}'
+  }
+  
+  for char in string:
+    if char in brackets:
+      stack.append(brackets[char])
+    else:
+      if stack and stack[-1] == char:
+        stack.pop()
+      else:
+        return False 
+  return len(stack) == 0 
+
+
+def decompress_braces(string):
+  numbers = '12345789'
+  stack = []
+  for char in string:
+    if char in numbers:
+      stack.append(int(char))
+    else:
+      # i know that i will be encounter my brackets
+      if char == '}':
+        segment =''
+        while isinstance(stack[-1],str):
+          popped = stack.pop()
+          segment = popped + segment 
+        num = stack.pop()
+        stack.append(segment * num)
+      elif char != '{':
+        stack.append(char)
+  return ''.join(stack)
+
+
+def subsets(elements):
+  if len(elements) == 0:
+    return [[]]
+  first = elements[0]
+  without_first = elements[1:]
+  
+  subs_withoutfirst = subsets(without_first)
+  subsets_with_first=[]
+  for sub in subs_withoutfirst:
+    subsets_with_first.append([first,*sub])
+  
+  return subs_withoutfirst + subsets_with_first
