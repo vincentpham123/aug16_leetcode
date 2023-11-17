@@ -85,3 +85,35 @@ def subsets(elements):
     subsets_with_first.append([first,*sub])
   
   return subs_withoutfirst + subsets_with_first
+
+def nesting_score(string):
+  stack = [0]
+  
+  for char in string:
+    if char == '[':
+      stack.append(0)
+    else:
+      popped = stack.pop()
+      if popped == 0:
+        stack[-1] +=1 
+      else:
+        stack[-1] += 2 * popped 
+  return stack[0]
+
+def linked_palindrome(head):
+  values = []
+  current = head 
+  while current is not None:
+    values.append(current.val)
+    current = current.next 
+    
+  return values == values[::-1]
+def middle_value(head):
+    values = []
+    
+    current = head 
+    
+    while current is not None:
+      values.append(current.val)
+      current = current.next 
+    return values[len(values)//2]
