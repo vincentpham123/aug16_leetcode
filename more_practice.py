@@ -117,3 +117,53 @@ def middle_value(head):
       values.append(current.val)
       current = current.next 
     return values[len(values)//2]
+
+def middle_value(head):
+  slow = head 
+  fast = head 
+  
+  while fast is not None and fast.next is not None:
+    slow = slow.next 
+    fast = fast.next.next 
+  return slow.val
+
+def linked_list_cycle(head):
+  nodes = set()
+  
+  current = head 
+  
+  while current is not None:
+    if current in nodes:
+      return True
+    
+    nodes.add(current)
+    current = current.next 
+  return False
+
+def lowest_common_ancestor(root, val1, val2):
+  path1 = find_path(root,val1)
+  path2 = find_path(root,val2)
+  set2 = set(path2)
+  
+  for val in path1:
+    if val in set2:
+      return val
+
+def find_path(root, target_val):
+  if root is None:
+    return None 
+  
+  if root.val == target_val:
+    return [ root.val]
+  
+  left_path = find_path(root.left, target_val)
+  
+  if left_path is not None:
+    left_path.append(root.val)
+    return left_path
+  right_path = find_path(root.right, target_val)
+  
+  if right_path is not None:
+    right_path.append(root.val)
+    return right_path
+  return None
