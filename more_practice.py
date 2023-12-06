@@ -189,3 +189,5 @@ def get_options(s):
     chars = s[0]
     remaining = s[1:]
     return ( remaining, chars )
+  
+
