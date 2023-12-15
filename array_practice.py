@@ -34,3 +34,25 @@ def compress(s):
       j+=1 
       
   return ''.join(result)
+
+def compress(s):
+  s +='!'
+  result = []
+  i=0
+  j=0 
+  
+  while j < len(s):
+    if s[i] == s[j]:
+      j+=1
+    else:
+      # i now know that their is a different letter 
+      num_of_letters = j - i
+      # this will provide the amount of letters to add to the result
+      if num_of_letters ==1:
+        result.append(s[i])
+      else:
+        result.append(str(num_of_letters))
+        result.append(s[i])
+      i=j 
+      
+  return ''.join(result)
