@@ -226,3 +226,9 @@ def create_linked_list(values):
     current.next = Node(value)
     current = current.next 
   return dummy_head.next
+
+#   if index == len(values):
+#     return None
+#   head = Node(values[index])
+#   head.next = create_linked_list(values, index+1)
+#   return head
