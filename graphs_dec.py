@@ -148,3 +148,99 @@ def closest_carrot(grid, starting_row, starting_col):
         visited.add(pos)
         queue.append((neighbor_row, neighbor_col, distance+1))
   return -1
+
+
+def has_cycle(graph):
+  
+  visited = set()
+  visiting = set()
+  
+  for node in graph:
+    if cycling(graph, node, visited, visiting) == True:
+      return True 
+  return False
+    
+def cycling(graph, node, visited, visiting):
+  
+  if node in visited:
+    return False
+  
+  if node in visiting:
+    return True 
+  
+  visiting.add(node)
+  
+  for neighbor in graph[node]:
+    if cycling(graph, neighbor, visited, visiting):
+      return True
+  visiting.remove(node)
+  visited.add(node)
+  return False
+
+def prereqs_possible(num_courses, prereqs):
+  
+  # if there is a cycle, then it is not True
+  graph = create_graph(num_courses, prereqs)
+  
+  visited=set()
+  visiting=set()
+  for node in graph:
+    if _prereqs_possibel(graph, node,visited, visiting):
+      return False
+  return True
+
+
+def _prereqs_possibel(graph, node, visited, visiting):
+  if node in visited:
+    return False 
+  
+  if node in visiting:
+    return True
+  
+  visiting.add(node)
+  
+  for neighbor in graph[node]:
+    if _prereqs_possibel(graph, neighbor, visited, visiting):
+      return True 
+  visiting.remove(node)
+  visited.add(node)
+  return False
+def create_graph(num_courses, prereqs):
+  
+  graph={}
+  
+  for i in range(num_courses):
+    graph[i] = []
+    
+  for pairs in prereqs:
+    x,y = pairs 
+    graph[x].append(y)
+    
+  return graph
+
+
+def timeConversion(s):
+    # Write your code here
+    # split the strong by ':'
+    # the last index[2:]
+    # check for am and pm
+    # decide how to convert the time from there
+    # if PM, add 12 to the first index[0]
+    # if am, change 12 to 1, add 1 to any other 
+    
+    s_array = s.split(":")
+    day_period = s_array[-1][2:]
+    print(day_period)
+    result =''
+    hour = int(s_array[0])
+    if day_period == "AM":
+        hour = hour%12
+    else:
+        hour = hour%12+12
+    if hour < 10:
+        result += '0'+str(hour)+':'
+    else:
+        result += str(hour)+":"
+    result+=str(s_array[1])+':'
+    result+=str(s_array[-1][:2])
+    return result
