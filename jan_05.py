@@ -27,3 +27,20 @@ def _trib(n, memo):
     return 1 
   memo[n] = _trib(n-1,memo) + _trib(n-2,memo) + _trib(n-3,memo)
   return memo[n]
+
+
+def sum_possible(amount, numbers):
+  return _sum_possible(amount, numbers, {})
+def _sum_possible(amount, numbers, memo):
+  # i will be subtracting from number from amount until it is 0 
+  if amount == 0:
+    return True 
+  if amount < 0:
+    return False 
+  
+  for num in numbers:
+    if _sum_possible(amount-num, numbers, memo):
+      memo[amount] = True 
+      return True 
+  memo[amount] =  False 
+  return False
