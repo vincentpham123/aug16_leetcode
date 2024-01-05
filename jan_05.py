@@ -44,3 +44,28 @@ def _sum_possible(amount, numbers, memo):
       return True 
   memo[amount] =  False 
   return False
+
+
+def min_change(amount, coins):
+  ans = _min_change(amount, coins, {})
+  if ans == float('inf'):
+    return -1
+  else:
+    return ans
+
+def _min_change(amount, coins, memo):
+  if amount in memo:
+    return memo[amount]
+  if amount == 0:
+    return 0
+  if amount < 0 :
+    return float('inf')
+  
+  size = float('inf')
+  for coin in coins:
+    temp_size = 1 + _min_change(amount-coin, coins, memo)
+    size = min(size, temp_size)
+    
+  memo[amount] = size
+  return size
+  
